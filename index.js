@@ -13,7 +13,22 @@ const fetchData = async searchTerm => {
    return response.data.Search;
 };
 
-createAutoComplete({root: document.querySelector('.autocomplete')});
+createAutoComplete({
+   root : document.querySelector('.autocomplete'),
+   renderOption(movie){      
+      const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
+      return `
+         <img src="${imgSrc}" />
+         ${movie.Title} (${movie.Year})
+      `;
+   }, 
+   onOptionSelect(movie){
+      onMovieSelect(movie);
+   },
+   inputValue(movie){
+      return movie.Title;
+   }
+});
 
 const onMovieSelect = async (movie) => {
    const response = await axios.get('http://www.omdbapi.com/', {
@@ -22,8 +37,8 @@ const onMovieSelect = async (movie) => {
         i: movie.imdbID
         }
     });
-    console.log(response.data);
-    console.log(document.querySelector("#summary"));
+   //  console.log(response.data);
+   //  console.log(document.querySelector("#summary"));
     document.querySelector("#summary").innerHTML = movieTemplate(response.data);
     movieTemplate(movie);
 }

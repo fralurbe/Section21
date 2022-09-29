@@ -55,7 +55,7 @@ const onMovieSelect = async (movie, summaryElement, side) => {
    //  console.log(response.data);
    //  console.log(document.querySelector("#summary"));
    summaryElement.innerHTML = movieTemplate(response.data);
-    movieTemplate(movie);
+   movieTemplate(movie);
 
    if(side === 'left')
       leftMovie = response.data;
@@ -68,10 +68,34 @@ const onMovieSelect = async (movie, summaryElement, side) => {
 }
 
 const runComparison = (leftMovie, rightMovie) => {
+   /*
+    find the first article element for each movie
+    Run a comparison on the box office
+    then apply some styling to that 'article' element
+
+    find the first article element for each movie
+    Run a comparison on the # of awards
+    then apply some styling to that 'article' element
+   */
    console.log('Can compare!')
 }
 
 const movieTemplate = (movieDetail) => {
+   const aux = movieDetail.BoxOffice.replace(/\$/g, '');
+   console.log(aux);
+   const dollars = parseInt(aux.replace(/,/g, ''));
+   const metaScore = parseInt(movieDetail.Metascore);
+   const boxOffice = parseInt(movieDetail.Metascore);
+   const imdbRating = parseFloat (movieDetail.imdbRating);
+   const imdbVotes = parseInt (movieDetail.imdbVotes.replace(/,/g, ''));
+   let awardsCount = 0;
+   const awards = movieDetail.Awards.split(' ').forEach(element => {
+      let value = parseInt(element);
+      if (!isNaN(value))
+         awardsCount += value;
+   });
+   console.log(dollars, metaScore, imdbRating, imdbVotes, awardsCount);
+
    return `
    <article class="media">
       <figure class="media-left">
@@ -87,23 +111,23 @@ const movieTemplate = (movieDetail) => {
          </div>
       </div>
    </article>
-   <article class="notification is-primary">
-      <p class="title">${movieDetail.Awards}</p>
+   <article data-value=${awardsCount} class="notification is-primary">
+      <p class="title">${movieDetail.Awards}</p>      
       <p class="subtitle">Awards</p>
    </article>
-   <article class="notification is-primary">
+   <article data-value=${boxOffice}class="notification is-primary">
       <p class="title">${movieDetail.BoxOffice}</p>
       <p class="subtitle">Box Office</p>
    </article>
-   <article class="notification is-primary">
+   <article data-value=${metaScore} class="notification is-primary">
       <p class="title">${movieDetail.Metascore}</p>
       <p class="subtitle">Metascore</p>
    </article>
-   <article class="notification is-primary">
+   <article data-value=${imdbRating} class="notification is-primary">
       <p class="title">${movieDetail.imdbRating}</p>
       <p class="subtitle">imdb Rating</p>
    </article>
-   <article class="notification is-primary">
+   <article data-value=${imdbVotes} class="notification is-primary">
       <p class="title">${movieDetail.imdbVotes}</p>
       <p class="subtitle">imdb Votes</p>
    </article>

@@ -85,7 +85,6 @@ const movieTemplate = (movieDetail) => {
    console.log(aux);
    const dollars = parseInt(aux.replace(/,/g, ''));
    const metaScore = parseInt(movieDetail.Metascore);
-   const boxOffice = parseInt(movieDetail.Metascore);
    const imdbRating = parseFloat (movieDetail.imdbRating);
    const imdbVotes = parseInt (movieDetail.imdbVotes.replace(/,/g, ''));
    let awardsCount = 0;
@@ -115,7 +114,7 @@ const movieTemplate = (movieDetail) => {
       <p class="title">${movieDetail.Awards}</p>      
       <p class="subtitle">Awards</p>
    </article>
-   <article data-value=${boxOffice}class="notification is-primary">
+   <article data-value=${dollars} class="notification is-primary">
       <p class="title">${movieDetail.BoxOffice}</p>
       <p class="subtitle">Box Office</p>
    </article>

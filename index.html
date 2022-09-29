@@ -8,7 +8,7 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.css"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -27,20 +27,23 @@
       </div>
     </section>
     <div class="container">   
-      <div class="colums">
-         <div class="colum">
+      <div class="columns">
+         <div class="column">
             <div id="left-autocomplete"></div>
-         </div>
-         
-         <div class="colum">
-            <div id="right-autocomplete"></div>
+            <div id="left-summary"></div>
          </div>
 
-         <div class="colum is-half notification is-primary tutorial">
-            <h1 class="title">Search for a movie on both sides.</h1>
-            <p class="subtitle">We will tell you wich is best.</p>
+         <div class="column">
+            <div id="right-autocomplete"></div>
+            <div id="right-summary"></div>
          </div>
       </div>
+
+      <div class="column is-half notification is-primary tutorial">
+         <h1 class="title">Search for a movie on both sides.</h1>
+         <p class="subtitle">We will tell you wich is best.</p>
+      </div>
+      
    </div>   
     <script src="utils.js"></script>
     <script src="autocomplete.js"></script>
